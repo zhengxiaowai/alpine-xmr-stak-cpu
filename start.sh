@@ -16,6 +16,4 @@ while [  ${COUNTER} -lt ${workers} ]; do
 done
 echo '],' >> /tmp/config.txt
 
-sysctl -w vm.nr_hugepages=128
-
 /xmr-stak-cpu/bin/xmr-stak-cpu
