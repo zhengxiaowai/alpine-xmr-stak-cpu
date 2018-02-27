@@ -5,7 +5,7 @@ wallet=$2
 password=$3
 workers=$4
 
-sed -i -e "s/POOL/${pool}/" -e "s/WALLET/${wallet}/" -e "s/PASSWORD/${password}/" /tmp/config.txt
+sed -i -e "s|POOL|$pool|" -e "s|WALLET|$wallet|" -e "s|PASSWORD|$password|" /tmp/config.txt
 
 echo '"cpu_threads_conf" :
 [' >> /tmp/config.txt
@@ -15,5 +15,7 @@ while [  ${COUNTER} -lt ${workers} ]; do
   let COUNTER=COUNTER+1 
 done
 echo '],' >> /tmp/config.txt
+
+sysctl -w vm.nr_hugepages=128
 
 /xmr-stak-cpu/bin/xmr-stak-cpu
